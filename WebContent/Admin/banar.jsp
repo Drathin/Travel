@@ -32,44 +32,44 @@
  <div data-options="fit:true" style="height:500px">
   <!--  <% out.print(basePath); %>
   <%  HttpSession se = request.getSession();
-      List banarList = (List)se.getAttribute("banarList"); %>-->
+      List bannerList = (List)se.getAttribute("bannerList"); %>-->
       
-       <!-- 显示数据记录的banar_dg ，使用easyui的easyui-datagrid-->
-	<table id="banar_dg" class="easyui-datagrid" style="height: 670px;"
-		url="Admin/Banar?action=findAllBanar" toolbar="#banar_toolbar" pagination="true" 
+       <!-- 显示数据记录的banner_dg ，使用easyui的easyui-datagrid-->
+	<table id="banner_dg" class="easyui-datagrid" style="height: 670px;"
+		url="Admin/Banner?action=findAllBanner" toolbar="#banner_toolbar" pagination="true" 
 		rownumbers="true" fitColumns="true" singleSelect="true" 
 		data-options="fit:true,border:false,pageSize:20,pageList:[5,10,15,20]">
 		<thead>
 			<tr>
-				<th field="banarid" width="50">编号</th>
+				<th field="bannerid" width="50">编号</th>
 				<th field="image" width="50">图片</th>
 				<th field="state" width="50">状态</th>
 			</tr>			
 		</thead>	
-	<%-- 	<c:if test="${!empty banarList }">
-				<c:forEach items="${banarList}" var="banar">
+	 	<c:if test="${!empty bannerList }">
+				<c:forEach items="${bannerList}" var="banner">
 					<tr>
-						<td>${banar.banarid }</td>
-						<td>${banar.image }</td>	
-						<td>${banar.state }</td>	
+						<td>${banner.bannerid }</td>
+						<td>${banner.image }</td>	
+						<td>${banner.state }</td>	
 					</tr>				
 				</c:forEach>
-			</c:if>	 --%>		
+			</c:if>	 		
 	</table>
 </div>
- <!-- 工具栏banar_toolba，使用easyui的easyui-linkbutton -->
-	<div id="banar_toolbar">
+ <!-- 工具栏banner_toolba，使用easyui的easyui-linkbutton -->
+	<div id="banner_toolbar">
 		<a href="javascript:void(0)" class="easyui-linkbutton"
-			iconCls="icon-add" plain="true" onclick="addBanar()">新增</a> <a
+			iconCls="icon-add" plain="true" onclick="addBanner()">新增</a> <a
 			href="javascript:void(0)" class="easyui-linkbutton"
-			iconCls="icon-edit" plain="true" onclick="editBanar()">编辑</a> <a
+			iconCls="icon-edit" plain="true" onclick="editBanner()">编辑</a> <a
 			href="javascript:void(0)" class="easyui-linkbutton"
-			iconCls="icon-remove" plain="true" onclick="destroyBanar()">删除</a>
+			iconCls="icon-remove" plain="true" onclick="destroyBanner()">删除</a>
 	</div>
-	<!-- 点新增按钮打开的上传图片的对话框banar_dlg，使用easyui的easyui-dialog -->
-	<div id="banar_dlg" class="easyui-dialog" style="padding: 10px 20px"
+	<!-- 点新增按钮打开的上传图片的对话框banner_dlg，使用easyui的easyui-dialog -->
+	<div id="banner_dlg" class="easyui-dialog" style="padding: 10px 20px"
 		closed="true" buttons="#contact_dlg-buttons">
-		<form id="banar_fm" method="post" novalidate enctype="multipart/form-data">
+		<form id="banner_fm" method="post" novalidate enctype="multipart/form-data">
 			  
 			  <div class="fitem">
 				<label>上传图片:</label><input name="imgwj" id="imgPicker" type="file"  onchange="xmTanUploadImg(this)">
@@ -122,36 +122,36 @@
 	            }
         	 </script>
 		</form>
-		<div id="banar_dlg-buttons">
+		<div id="banner_dlg-buttons">
 			<a href="javascript:void(0)" class="easyui-linkbutton c6"
-				iconCls="icon-ok" onclick="saveBanar()" style="width: 90px">保存</a> 
+				iconCls="icon-ok" onclick="saveBanner()" style="width: 90px">保存</a> 
 			<a href="javascript:void(0)" class="easyui-linkbutton"
-				iconCls="icon-cancel" onclick="javascript:$('#banar_dlg').dialog('close')"
+				iconCls="icon-cancel" onclick="javascript:$('#banner_dlg').dialog('close')"
 				style="width: 90px; float: right;">取消</a>
 		</div>
 	</div>
 	
 	<script type="text/javascript">
 		var url;
-		function addBanar() {
+		function addBanner() {
 			document.getElementById('xmTanImg').src = '';
-			$('#banar_dlg').dialog('open').dialog('setTitle', '新增');
-			$('#banar_fm').form('clear');
-			url = 'Admin/Banar?action=addBanar';
+			$('#banner_dlg').dialog('open').dialog('setTitle', '新增');
+			$('#banner_fm').form('clear');
+			url = 'Admin/Banner?action=addBanner';
 		}
-		function editBanar() {
+		function editBanner() {
 			var imageinput = document.getElementsByName('image');
             imageinput.value = '';
-			var row = $('#banar_dg').datagrid('getSelected');
+			var row = $('#banner_dg').datagrid('getSelected');
 			document.getElementById('xmTanImg').src = row.image;
 			if (row) {
-				$('#banar_dlg').dialog('open').dialog('setTitle', '编辑');
-				$('#banar_fm').form('load', row);
-				url = 'Admin/Banar?action=updateBanar&?banarid=' + row.banarid;
+				$('#banner_dlg').dialog('open').dialog('setTitle', '编辑');
+				$('#banner_fm').form('load', row);
+				url = 'Admin/Banner?action=updateBanner&?bannerid=' + row.bannerid;
 			}
 		}
-		function saveBanar() {
-			$('#banar_fm').form('submit', {
+		function saveBanner() {
+			$('#banner_fm').form('submit', {
 				url : url,
 				onSubmit : function() {
 					return $(this).form('validate');
@@ -164,23 +164,23 @@
 							msg : result.errorMsg
 						});
 					} else {
-						$('#banar_dlg').dialog('close'); // close the dialog
-						$('#banar_dg').datagrid('reload'); // reload the banar data
+						$('#banner_dlg').dialog('close'); // close the dialog
+						$('#banner_dg').datagrid('reload'); // reload the banner data
 					}
 				}
 			});
 		}
-		function destroyBanar() {
-			var row = $('#banar_dg').datagrid('getSelected');
+		function destroyBanner() {
+			var row = $('#banner_dg').datagrid('getSelected');
 			if (row) {
 				$.messager.confirm('Confirm', '确定要删除吗?', function(r) {
 					if (r) {
-						$.post('Admin/Banar?action=delBanar', {
-							banarid : row.banarid
+						$.post('Admin/Banner?action=delBanner', {
+							bannerid : row.bannerid
 						}, function(result) {
 							if (result.success) {
-								//$('#banar_dg').datagrid('clearSelections');
-								$('#banar_dg').datagrid('reload'); // reload the banar data								
+								//$('#banner_dg').datagrid('clearSelections');
+								$('#banner_dg').datagrid('reload'); // reload the banner data								
 							} else {
 								$.messager.show({ // show error message
 									title : 'Error',
